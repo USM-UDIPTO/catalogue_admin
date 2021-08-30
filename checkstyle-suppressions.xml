@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<suppressions>
+	<suppress files="[\\/]src[\\/]test[\\/]java[\\/]"
+		checks="Javadoc*" />
+	<suppress files=".*Tests\.java" checks="Javadoc*" />
+	<suppress files="generated-sources" checks="[a-zA-Z0-9]*" />
+	<suppress files="MavenWrapperDownloader.java"
+		checks="[a-zA-Z0-9]*" />
+	<suppress files="CatalogueAdminServiceApplicationTests\.java"
+		checks="FinalClass" />
+	<suppress files=".+Configuration\.java"
+		checks="HideUtilityClassConstructor" />
+	<suppress files=".+Application\.java"
+		checks="HideUtilityClassConstructor" />
+	<suppress files="CatalogueItemsFileExporter\.java"
+		checks="HideUtilityClassConstructor" />
+	<suppress files="MasterServiceMock\.java"
+		checks="HideUtilityClassConstructor" />
+
+</suppressions>

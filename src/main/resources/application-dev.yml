@@ -1,0 +1,71 @@
+
+logging:
+  level:
+    ROOT: DEBUG
+    com.dxc.eproc: DEBUG
+    
+server:
+  port: 8080
+    
+#Spring Starts
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: static/**
+    livereload:
+      enabled: false
+  jackson:
+    serialization:
+      indent-output: true    
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${DB_HOSTNAME}:${DB_PORT}/${DB_DATABASE}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+    #driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+    #dbcp2:
+      #test-on-borrow: true
+  transaction:
+    default-timeout: 120    
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: MYSQL
+    show-sql: true
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate.connection.provider_disables_autocommit: true
+        #hibernate.cache.use_second_level_cache: true
+        #hibernate.cache.use_query_cache: false
+        #hibernate.generate_statistics: false
+      #hibernate.hbm2ddl.auto: update
+#Spring Ends
+
+
+amqphub:
+  amqp10jms:
+    remote-url: amqp://130.175.175.137:5672
+    
+ 
+#eProcurement Properties Starts
+eprocurement:
+  cors:
+    allowed-origins: '*'
+    allowed-methods: '*'
+    allowed-headers: '*'
+    exposed-headers: 'Authorization,Link,X-Total-Count,X-${eprocurement.clientApp.name}-alert,X-${eprocurement.clientApp.name}-error,X-${eprocurement.clientApp.name}-params'
+    allow-credentials: false
+    max-age: 1800
+
+# Feign Client Starts
+master-service:
+  url: ${MASTER-SERVICE-URL}

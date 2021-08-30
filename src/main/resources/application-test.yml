@@ -1,0 +1,33 @@
+
+server:
+  port: 9990
+  address: localhost
+  
+amqphub:
+  amqp10jms:
+    remote-url: amqp://localhost:5671
+  
+#Spring Starts
+spring:
+  profiles:
+    active:
+    - test 
+  datasource:
+    url: jdbc:h2:mem:catalogue_admin_service
+    #;MVCC=true;
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+       hibernate:
+          enable_lazy_load_no_trans: true
+          dialect: org.hibernate.dialect.H2Dialect
+          hbm2ddl:
+            auto: create-drop
+          show-sql: true
+#Spring Ends
+
+# Feign Client Starts
+master-service:
+  url: http://localhost:9561
